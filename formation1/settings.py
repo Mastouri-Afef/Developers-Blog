@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY= os.environ.get('SECRET_KEY')
+SECRET_KEY="822e7d6d905023f5b0fc287b3862d2caab476be715081d0c"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,4 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4' #use bootstrap4 for our css template
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login' #login is the name that we will gave it to our url pattern to the login route
+django_heroku.settings(locals())
 
