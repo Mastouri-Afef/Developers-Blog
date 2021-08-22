@@ -1,0 +1,17 @@
+{% extends 'Base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %} <!--this protect our form against certeain attacks ,added security django rquires-->
+            <fieldset class="form-group">
+              <legend class="border-botton mb-4">Blog Post</legend>
+              {{ form|crispy}} 
+              <!--"as_p" rendre stype te3 form kima paragrahpe , kyyf nesta3ml bootstrap 4 lel crispy forms na7i symbolole "as_p"-->
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'Base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %} <!--this protect our form against certeain attacks ,added security django rquires-->
+            <fieldset class="form-group">
+              <legend class="border-botton mb-4">Join Today</legend>
+              {{ form|crispy}} 
+              <!--"as_p" rendre stype te3 form kima paragrahpe , kyyf nesta3ml bootstrap 4 lel crispy forms na7i symbolole "as_p"-->
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+            <!--- put div for a link if he is already have account--->
+            <div class="border-top pt-3">
+                <small class="test-muted">Already Have an account <a class="ml-2" href="{% url 'login' %}">Sign In</a></small> <!--it a bootstrap -->
+            </div>
+        </form>
+    </div>
+{% endblock %}
