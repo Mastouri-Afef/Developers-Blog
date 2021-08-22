@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+from base import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -137,4 +138,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4' #use bootstrap4 for our css template
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login' #login is the name that we will gave it to our url pattern to the login route
 django_heroku.settings(locals())
-
+DJANGO_SETTINGS_MODULE='correctly_settings'
