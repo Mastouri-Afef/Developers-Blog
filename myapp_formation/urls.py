@@ -19,13 +19,15 @@ from .views import (
      PostDetailView,
      PostCreateView,
      PostUpdateView,
-     PostDeleteView
+     PostDeleteView,
+     UserPostListView
      )
 from . import views
 
 urlpatterns = [
 #as_view it's a method transform the class to a view we can see it
     path('', PostListView.as_view(), name='blog-home'),
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     #if i want to see the blog one or two by details (pl hiya primary key (1,2..) 
     #after that we need a template to show all our posts details

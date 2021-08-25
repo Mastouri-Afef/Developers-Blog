@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# Create your views here.
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from datetime import datetime
@@ -24,7 +24,23 @@ class PostListView(ListView):
     context_object_name = 'posts'
     #to mkae the oldest one in the top we need to change the order our query is making to the database
     ordering = ['-date_posted']
+    #about pagination 
+    paginate_by = 5
 
+#class to see posts per user when i click to him  
+class UserPostListView(ListView):
+
+    model = Post
+    template_name = 'user_posts.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    paginate_by = 5
+#get_query_set will limit our posts on that page to that specific user
+    def get_queryset(self):
+    #we wanna take the user that we took it from the url #(filter to take values from a certain user and then display it )
+        user = get_object_or_404(User, username=self.kwargs.get('username'))#we want to get this object from that user model and the user that we will get is equal to username, and this username we will get it throw url and if this objet doesn't exit in database return 404,-->import user
+        #return our quesrry
+        return Post.objects.filter(author=user).order_by('-date_posted')
+    #after that create a path url in the urlpatterns(in urls.py) then create the template("user-posts.html", in the template we will copy from home.html but we will just add a head to speccify that this is the user page)
 class PostDetailView(DetailView):
 #the model set to "Post"
     model = Post

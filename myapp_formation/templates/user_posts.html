@@ -1,12 +1,14 @@
 {% extends 'Base.html' %}
 {% block content %}
+<!--- "view.kwargs.username" to take the username from the url and to display the number of posts have use"page_obj.paginator.count", "count" will return  the number of objects that exist along of the pages- and then change the dead link in <h2> by "% url 'user-posts' post.author.username %" , then put this link in home and post detail(change post to object) template to make access to him--->
 
+  <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
   {% for post in posts %}
 	<article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
 	  <div class="media-body">
 	    <div class="article-metadata">
-	      <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
 	      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> <!--#le caractere| for filtring date -->
 	    </div>
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
