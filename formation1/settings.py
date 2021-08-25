@@ -123,10 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #in django "BASE_DI" specfiy the location of the project base directory and here we said that we will have a directory callled "media" hedha chy mochtarek (path)mahma ykoun naw3 os 
 #the default path to the directorywould like django to store uploaded file, they are previously stored on system and not in database
+MEDIA_URL ='/media/'
 #the media route is where the uploaded files will be located n the file system
 #in profil_pics qu'on créer dans models .py w yesta9bel tsawer , tw directory hedha chywali ta7t directory media
 #ba3d hedha lazem n5aliw taswira tben kyyf nemchi lel prifle url
@@ -143,5 +143,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "afefmastouri1@gmail.com"
-EMAIL_HOST_PASSWORD = 'afefrodeinaguider'
+EMAIL_HOST_USER = os.environ.get('AuthUser')
+EMAIL_HOST_PASSWORD = os.environ.get('AuthPass')
