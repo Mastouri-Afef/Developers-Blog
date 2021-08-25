@@ -45,7 +45,7 @@ urlpatterns = [
          ),
          name='password_reset_confirm'),                  
        ]
-
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #if we are in debug mode , chan3mlo amr heka hedha wa9t eli n7ebo taswira tbenelna fl profile kyyf nod5lo lel url te3o
 if settings.DEBUG:
 #here media url and media root added to the url parent ,should now make our media with the browser
