@@ -21,10 +21,10 @@ class Profile(models.Model):
    
    #after that code we should do migrations "python manage.py makemigrations" and "python manage.py migrate"  and install pillow  , the register this model "profile" in the admin file of our step
         
-    def save(self):
+    def save(self, *args, **kwargs):
         #the method that would be run after the model will be saved(this method exit in the parent cllass we can run it using super() to saved an instance of the profile )
         
-        super().save()
+        super(Profile, self).save(*args, **kwargs)
         #no we will grab the image after saving it and resize it--> so import pillow library
         #open the image for the profile instance that we are saving
         img = Image.open(self.image.path)
