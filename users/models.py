@@ -1,7 +1,6 @@
 from django.db import models
 from PIL import Image
-# Create your models here.
-
+from .validators import DomainUnicodeUsernameValidator
 from django.contrib.auth.models import User
 from django.conf.urls.static import static
 from django.conf import settings
@@ -35,6 +34,17 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             #save it to the same path
             img.save(self.image.path)
+
+class DomainUser(User):
+    class Meta:
+        proxy = True
+
+    def __init__(self, *args, **kwargs):
+        self._meta.get_field(
+            'username'
+        ).validators[0] = DomainUnicodeUsernameValidator()
+
+        super().__init__(*args, **kwargs)            
             
         
         
