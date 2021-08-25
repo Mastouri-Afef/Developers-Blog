@@ -10,7 +10,7 @@ from django.views.generic import ListView
 from .forms import CommentForm #then add adiv in post_form.html
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
-
+from django.contrib import messages
 def home(request):
        context = { 
             'posts': Post.objects.all()#il faut imports Post ml models à travers from .models import Post
@@ -57,13 +57,18 @@ class PostDetailView(DetailView):
     form = CommentForm
 
     def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            post = self.get_object()
-            form.instance.user = request.user
-            form.instance.post = post
-            form.save()
-        return  render(request, 'post_detail.html')
+        if request.method == 'POST':
+           form = CommentForm(request.POST)
+           if form.is_valid():
+              post = self.get_object()
+              form.instance.user = request.user
+              form.instance.post = post
+              form.save()
+              messages.success(request, f'You dont seem you have an account, please Sign in')
+              return  render(request, 'post_detail.html')
+        else:
+              form=CommentForm()    
+              return render(request,'home.html',{'form': form})        
     def get_context_data(self, **kwargs):
 
         post_comments_count = Comment.objects.all().filter(post=self.object.id).count()
