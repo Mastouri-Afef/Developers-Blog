@@ -27,8 +27,24 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('', include('myapp_formation.urls')), 
-       
-]
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(
+             template_name='password_reset.html'
+         ),
+         name='password_reset'), 
+        #this to confirm that email sent and check it inbox
+    path('password-reset/done/',
+        auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
+        name='password_reset_done'),    
+    path('password-reset-confirm/<uidb64>/<token>',
+        auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+        name='password_reset_confirm'),    
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='password_reset_complete.html'
+         ),
+         name='password_reset_confirm'),                  
+       ]
 
 #if we are in debug mode , chan3mlo amr heka hedha wa9t eli n7ebo taswira tbenelna fl profile kyyf nod5lo lel url te3o
 if settings.DEBUG:
